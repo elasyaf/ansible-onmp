@@ -1,0 +1,51 @@
+# Take note of http://wiki.nginx.org/Pitfalls
+
+#user  www;
+worker_processes  1;
+
+
+worker_rlimit_nofile 1024;
+events {
+    worker_connections  800;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    index         index.html index.htm;
+    keepalive_timeout  65;
+    gzip  on;
+
+    server {
+        listen       80;
+        listen       [::]:80;
+        server_name  "{{ansible_fqdn}}";
+        root         /var/www/html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root  /var/www/htdocs;
+        }
+
+
+        location / {
+                root /var/www/html;
+                autoindex on;
+                autoindex_exact_size off;
+                index index.html index.htm index.php;
+        }
+
+        location ~ \.php$ {
+            try_files      $uri $uri/ =404;
+            fastcgi_pass   unix:run/php-fpm.sock;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+    }
+
+}
