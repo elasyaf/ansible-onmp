@@ -1,9 +1,10 @@
 ---
 - name: star mysql_install_db after mariadb installation
   shell: mysql_install_db
+  ignore_errors: yes
   wait_for:
     delay: 40
-  ignore_errors: yes
+
 
 - name: set root default password
   mysql_user:
