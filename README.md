@@ -20,7 +20,7 @@ new_root_password: "" (for new root password)
 Dependencies
 ------------
 
-None
+MySQL-python module
 
 Example Playbook
 ----------------
