@@ -1,2 +1,20 @@
 ---
-# tasks file for ansible-onmp
+- name: add repository
+  command: export PKG_PATH=http://kartolo.sby.datautama.net.id/OpenBSD/6.3/packages/amd64/
+
+- name: Make sure listed package installed
+  openbsd_pkg:
+    name: "{{item}}"
+    state: present
+  wiht_items:
+    - nginx
+    - php
+    - php-mysqli
+    - mariadb-server
+
+- name: Enable and start service
+  command: "{{item}}"
+  with_items:
+    - rcctl enable nginx && rcctl start nginx
+    - rcctl enable php70_fpm && rcctl start php70_fpm
+    - rcctl enable mysqld  && rcctl start mysqld
