@@ -12,6 +12,9 @@
     - php-mysqli
     - mariadb-server
 
+- name: star mysql_install_db after mariadb installation
+  command: mysql_install_db
+
 - name: Enable and start service
   command: "{{item}}"
   with_items:
