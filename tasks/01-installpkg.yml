@@ -9,7 +9,7 @@
   with_items:
     - nginx
     - php
-    - php-mysqli
+    - php-mysqli-7.0.28
     - mariadb-server
 
 - name: copy config for nginx
