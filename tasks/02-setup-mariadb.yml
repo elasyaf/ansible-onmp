@@ -4,9 +4,9 @@
   ignore_errors: yes
 
 - name: Enable mariadb
-  command: "{{item}}"
+  shell: "{{item}}"
   with_items:
-    - rcctl enable mysqld  && rcctl start mysqld
+    - rcctl enable mysqld && rcctl start mysqld
 
 - name: set root default password
   mysql_user:
