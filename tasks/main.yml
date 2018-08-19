@@ -15,6 +15,11 @@
 - name: star mysql_install_db after mariadb installation
   command: mysql_install_db
 
+- name: copy config for nginx
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+
 - name: Enable and start service
   command: "{{item}}"
   with_items:
