@@ -1,12 +1,12 @@
 ---
 - name: add repository
-  command: export PKG_PATH=http://kartolo.sby.datautama.net.id/OpenBSD/6.3/packages/amd64/
+  shell: export PKG_PATH=http://kartolo.sby.datautama.net.id/OpenBSD/6.3/packages/amd64/
 
 - name: Make sure listed package installed
   openbsd_pkg:
     name: "{{item}}"
     state: present
-  wiht_items:
+  with_items:
     - nginx
     - php
     - php-mysqli
