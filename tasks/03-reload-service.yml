@@ -4,4 +4,3 @@
   with_items:
     - rcctl enable nginx && rcctl start nginx
     - rcctl enable php70_fpm && rcctl start php70_fpm
-    - rcctl enable mysqld  && rcctl start mysqld
