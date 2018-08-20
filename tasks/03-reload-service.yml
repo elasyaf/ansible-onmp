@@ -1,6 +1,6 @@
 ---
 - name: Enable and start service
-  command: "{{item}}"
+  shell: "{{item}}"
   with_items:
     - rcctl enable nginx && rcctl start nginx
     - rcctl enable php70_fpm && rcctl start php70_fpm
